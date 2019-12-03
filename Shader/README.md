@@ -4,10 +4,6 @@ Unity Engine Challenge by mixi Shader チュートリアル
 これは Unity Engine Challenge by mixi のShaderチュートリアルです。
 Shaderの基礎的な知識や実装方法について、例題を元に理解深めていってください。
 
-## セットアップ
-- hogehoge
-
-
 ## 頂点シェーダ、フラグメントシェーダとは
 - hogehoge
 
@@ -107,6 +103,5 @@ struct v2f
 - `x`の絶対値を返す
 
 **sin(x)**, **cos(x)**
-- `sin`, `cos`のの値を返す
+- `sin`, `cos`の値を返す
 
-などなど
