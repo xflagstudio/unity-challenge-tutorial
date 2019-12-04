@@ -30,7 +30,7 @@ UV座標とは、テクスチャ上の座標を表します。
 
 ## 例題01：RGB値を変更して色を変える
 
-シーン上に表示されているモデルの色を変えるようなShaderを実装してください。
+シーン上に表示されているQuadの色を変えるようなShaderを実装してください。
 
 
 ### 進め方
@@ -48,14 +48,15 @@ float4 c = tex2D(_MainTex, i.uv);
 各要素へは`r`,`g`,`b`,`a`もしくは`x`,`y`,`z`,`w`としてアクセスできます。`c.rgb`など組み合わせて扱うこともできます。
 
 
-## 例題02：UV座標を変更してグラデーションをさせる
+## 例題02：UV座標を使ってグラデーションをさせる
 
-シーン上に表示されているモデルのUV座標を変更してグラデーションをかけるようなShaderを実装してください。
+シーン上に表示されているQuadにグラデーションをかけるようなShaderを実装してください。
+なお、グラデーションの実装にはUV座標を使用してください。
 
 ### 進め方
 - `Assets/Scenes/Tutorial02` を開いてください。
 - `Assets/Shaders/Tutorial02` を開いてください。
-- 頂点シェーダ `vert` に実装を追加してください。
+- 頂点シェーダ `frag` に実装を追加してください。
 
 ### 実装について
 モデルの色を変える方法は例題01で実装したとおりです。
@@ -77,7 +78,7 @@ struct v2f
 
 ## 例題03：頂点座標を変更して波を作る
 
-シーン上に表示されているモデルの頂点座標を変更して波Shaderを実装してください。
+シーン上に表示されているPlaneの頂点座標を変更して波Shaderを実装してください。
 
 
 ### 進め方
@@ -90,7 +91,12 @@ struct v2f
 
 引数で渡される`appdata v`はUnityから受け取るモデルの頂点情報で、それを`UnityObjectToClipPos(v.vertex)`でスクリーン上に描画する座標を計算して頂点情報を作成しています。
 
-波を実装するには常時値が変わるような変数が必要ですが、Unityの組み込み定義値として、時間`_Time`を使用できます。
+また、波を実装するには常時値が変わるような変数が必要ですが、組み込み変数として、時間`_Time`を使用できます。
+
+上述の`UnityObjectToClipPos(float3 pos)`や`_Time`はUnityが用意している組み込みの関数や変数になります。
+- https://docs.unity3d.com/2019.2/Documentation/Manual/SL-BuiltinFunctions.html
+- https://docs.unity3d.com/2019.2/Documentation/Manual/SL-UnityShaderVariables.html
+
 
 ## 例題04：実機ビルド
 実際の問題では、実機ビルドをして解いてもらう問題があります。
@@ -106,11 +112,11 @@ struct v2f
 - `Add Open Scene`を押して、確認したいSceneを`Scene In Build`に追加。
 - 実機を自身のPCに接続。
     - 接続許可を聞くダイアログが出た場合は、「はい」を選択。
-- `Build and Run`！。
+- `Build and Run`を選択。
 
 
 ## 補足：関数について
-下記のように様々な関数が組み込みで用意されてるため、実装のヒントに役立ててください。
+下記のような関数が組み込みで用意されてるため、実装のヒントに役立ててください。
 
 **fmod(x, y)**
 - `x / y`の余剰を返す
@@ -133,3 +139,5 @@ struct v2f
 **sin(x)**, **cos(x)**
 - `sin`, `cos`の値を返す
 
+これ以外にも様々な関数があるので、調べてより知識を深めてみてください！
+- 参考：https://developer.download.nvidia.com/CgTutorial/cg_tutorial_appendix_e.html
